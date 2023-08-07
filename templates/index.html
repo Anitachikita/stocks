@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+        <table class="table table-striped" >
+          <thead>
+            <tr >
+              <td class="fw-bold">Symbol</td>
+              <td class="fw-bold">Name</td>
+              <td class="fw-bold">Shares</td>
+              <td class="fw-bold">Price</td>
+              <td class="fw-bold">Total</td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for credits in credit %}
+            <tr>
+              <td>{{ credits.symbol | upper() }}</td>
+              <td>{{ credits.name }}</td>
+              <td>{{ credits.shares }}</td>
+              <td>{{ credits.price | usd }}</td>
+              <td>{{ (credits.price * credits.shares) | usd }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+              <td>{{current_cash | usd}}</td>
+            </tr>
+            <tr>
+              <td class="border-0 fw-bold text-end" colspan="4">Total</td>
+              <td>{{ total | usd }}</td>
+            </tr>
+          </tfoot>
+        </table>
+
+{% endblock %}
